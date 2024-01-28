@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+.container {
+    height: 600px;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddabab; /* Main background color */
+    border-radius: 10px;
+}
+
+span {
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; / Modern sans-serif font /
+    text-transform: uppercase;
+    width: 100px;
+    color: #ffffff; / Text color /
+}
+
+p {
+    font-size: 24px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; / Modern sans-serif font /
+    text-transform: uppercase;
+    width: 300px;
+    text-align: center;
+    transform: translateX(-20px);
+    color: #804444; / Text color /
+}
+
+#top1 {
+    transform: translateY(-80px) translateX(-130px);
+    font-family: "Times New Roman", Times, Serif, serif;
+    color: #804444; / Text color /
+}
+
+#top2 {
+    transform: translateY(-80px) translateX(-45px);
+    font-family: "Times New Roman", Times, Serif, serif;
+    color: #804444; / Text color /
+}
+
+#para1 {
+    transform: translateX(50px);
+    display: inline-block;
+    color: #804444; / Text color /
+}
+
+#para2 {
+    transform: translateX(-160px);
+    display: inline-block;
+    color: #804444; / Text color /
+}
+
+/*.btn {*/
+/*    color: #ffffff; / Button text color *!*/
+/*    border: none;*/
+/*    padding: 10px 20px;*/
+/*    font-size: 18px;*/
+/*    cursor: pointer;*/
+/*    border-radius: 5px;*/
+/*    margin-top: 20px;*/
+/*    background-color: #804444;*/
+/*}*/
+
+h2 {
+    color: #ddabab;
+    font-size: 50px;
+    font-family: "Brush Script MT", "cursive";
+}
+
+#myImage {
+            position: absolute;
+            top: -4px;
+            right: 10px;
+            max-width: 100%;
+            height: auto;
+            width: 145px;
+        }
+.image-button {
+            background-color: #ddabab;
+            border: none;
+            color: antiquewhite;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-family: "Times New Roman", Times, Serif, serif;
+            display: inline-block;
+            font-size: 8px;
+            cursor: pointer;
+        }
+
+        .button-image {
+            width: 240px;
+            height: auto;
+            /*margin-right: 10px;*/
+        }
+
+</style>
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+
+<img id="myImage" src="https://i.imgur.com/PmiSqve.png" alt="My image"/>
+
+<h2>You are more likely to:</h2>
+
+<div class="container">
+    <p id="para1"></p>
+    <p id="top1">pass from</p>
+
+    <button class="image-button" onclick="processFile();">
+    <img src="https://i.imgur.com/kywkUrk.png" alt="Icon" class="button-image">
+    </button>
+
+    <p id="top2">than pass from</p>
+    <p id="para2"></p>
+</div>
+
+<script>
+    var para1 = document.getElementById("para1");
+    var para2 = document.getElementById("para2");
+
+
+    function processFile() {
+        // var fileInput = document.getElementById('fileInput');
+        // var file = fileInput.files[0];
+
+        var causes = [
+            "Falling coconuts", "Bee stings", "Lightning strikes", "Slip and fall", "Car accident",
+            "Choking on food", "Drowning", "Medical errors", "Shark attack", "Influenza",
+            "Electrocution", "Snake bite", "Terrorist attack", "Space debris impact", "Fire",
+            "Explosion", "Freak accident", "Heart attack", "Hypothermia", "Avalanche",
+            "Chupacabra attack", "Freak weather event", "Tsunami", "Vending machine tip", "Suffocation",
+            "Meteorite impact", "Freak animal attack", "Homicide", "Poisoning", "Sports accident",
+            "Hotdog eating contest", "Lightning while golfing", "Volcanic eruption", "Skiing accident", "Boating accident",
+            "Dieting", "Selfie accident", "Falling icicles", "Gas explosion", "Furniture accident",
+            "Tight necktie", "Shoe laces", "Caffeine overdose", "Elevator accident", "Riot",
+            "Parachute failure", "Iceberg collision", "Dog attack", "Allergic reaction", "Dust storm",
+            "Base jumping", "Self-immolation", "Vampire attack", "Frozen waterfall", "Acid rain",
+            "Horse kick", "Spontaneous combustion", "Jellyfish sting", "Helicopter crash", "Rabies",
+            "Magnetic field shift", "Rogue satellite crash", "Dysentery", "Time travel paradox", "Zombie apocalypse",
+            "Alien abduction", "Sudden piano impact", "Falling vending machines", "Runaway lawnmower accident", "Combustible underpants",
+            "Sudden giraffe stampede", "Extreme pillow fight", "Colliding with own reflection"
+        ];
+        var incidence;
+        incidence = [
+            0.01, 0.05, 0.1, 0.5, 1.2,
+            0.3, 0.8, 0.6, 0.02, 0.4,
+            0.15, 0.07, 0.03, 0.015, 0.45,
+            0.25, 0.35, 1.0, 0.11, 0.06,
+            0.005, 0.085, 0.075, 0.02, 0.21,
+            0.01, 0.032, 0.42, 0.24, 0.17,
+            0.022, 0.013, 0.038, 0.12, 0.09,
+            0.017, 0.008, 0.023, 0.03, 0.043,
+            0.009, 0.016, 0.021, 0.014, 0.019,
+            0.006, 0.011, 0.027, 0.065, 0.007,
+            0.03, 0.005, 0.001, 0.01, 0.006,
+            0.025, 0.004, 0.012, 0.02, 0.015,
+            0.003, 0.001, 0.02, 0.001, 0.001,
+            0.001, 0.001, 0.004, 0.003, 0.001,
+            0.001, 0.001, 0.001
+        ];
+
+        // Print the arrays
+        console.log("First Items Array:", causes);
+        console.log("Second Items Array:", incidence);
+
+        // Display the arrays on the HTML page
+        // appendToBody("First Items Array: " + causes.join(", "));
+        // appendToBody("Second Items Array: " + incidence.join(", "));
+
+        do {
+            var randomNumber1 = Math.floor(Math.random() * causes.length);
+            var randomNumber2 = Math.floor(Math.random() * incidence.length);
+        } while (randomNumber1 === randomNumber2 || incidence[randomNumber1] === incidence[randomNumber2]);
+
+        if (incidence[randomNumber1] > incidence[randomNumber2]) {
+            var new_text1 = causes[randomNumber1];
+            var new_text2 = causes[randomNumber2];
+        } else {
+            var new_text2 = causes[randomNumber1];
+            var new_text1 = causes[randomNumber2];
+        }
+
+        // var new_text1 = causes[randomNumber1];
+        // var new_text2 = incidence[randomNumber2];
+
+        para1.innerText = new_text1;
+        para2.innerText = new_text2;
+
+    }
+
+    function appendToBody(text) {
+        var paragraph = document.createElement("p");
+        paragraph.textContent = text;
+        document.body.appendChild(paragraph);
+    }
+
+    function changeText() {
+        // Here, you can implement logic to change the text based on the processed file content.
+        // For example, you can randomly select items from firstItems and secondItems arrays.
+
+        do {
+            var randomNumber1 = Math.floor(Math.random() * firstItems.length);
+            var randomNumber2 = Math.floor(Math.random() * secondItems.length);
+        } while (randomNumber1 === randomNumber2);
+
+        var new_text1 = firstItems[randomNumber1];
+        var new_text2 = secondItems[randomNumber2];
+
+        para1.innerHTML = "<p id='new_line'> new_text1 </p>";
+        para2.innerHTML = "<p id='new_line'> new_text2 </p>";
+    }
+</script>
+
+</html>
